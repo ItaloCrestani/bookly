@@ -1,4 +1,5 @@
 import { useLocation } from "react-router"
+import { ProfileModal } from "../../profileModal";
 
 export function MainHeader() {
   const { pathname } = useLocation();
@@ -25,9 +26,7 @@ export function MainHeader() {
         </p>
       </div>
 
-      <button className="w-8 h-8 font-bold text-[20px] text-white bg-(--color-2) rounded-full">
-        L
-      </button>
+      <ProfileModal />
   </header>
 )
 }

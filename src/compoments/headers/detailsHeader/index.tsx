@@ -1,6 +1,7 @@
 import { GoArrowLeft } from "react-icons/go";
 
 import { Navigate, useMatch, useNavigate } from "react-router";
+import { ProfileModal } from "../../profileModal";
 
 export function DetailsHeader() {
   const navigate = useNavigate();
@@ -41,9 +42,7 @@ export function DetailsHeader() {
         {buttonContent?.label}
       </button>
 
-    <button className="w-8 h-8 font-bold text-[20px] text-white bg-[#8849EE] rounded-full">
-      L
-    </button>
+    <ProfileModal />
   </header>
 )
 }

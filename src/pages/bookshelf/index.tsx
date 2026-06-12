@@ -11,10 +11,10 @@ import { ReadingCard } from "../../compoments/cards/readingCard";
 import { ReadCard } from "../../compoments/cards/readCard";
 import { ReadedCard } from "../../compoments/cards/readedCard";
 import { ReadingCardSkeleton } from "../../compoments/skeleton/readingCard";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { motion } from "framer-motion";
 import { ReadCardSkeleton } from "../../compoments/skeleton/readCard";
 import { EmptyCard } from "../../compoments/cards/emptyCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { motion } from "framer-motion";
 
 export interface BookProps{
   id: string;
@@ -55,7 +55,7 @@ export function Bookshelf() {
   }, [user])
 
   function loadBooks() {
-    if (!user) return
+    if (!user) return;
 
     try {
       setLoadingBooks(true);
@@ -135,7 +135,7 @@ export function Bookshelf() {
                 </motion.div>
               </SwiperSlide>
             ))}
-            <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+            <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)"/>
           </Swiper>
         )}
       </div>

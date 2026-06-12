@@ -1,7 +1,5 @@
-import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import { CiBookmark, CiCalendar } from "react-icons/ci";
+import {  CiCalendar } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { HiOutlineBookOpen } from "react-icons/hi2";
 import { FiUser } from "react-icons/fi";
 import { LuBook } from "react-icons/lu";
 import { PiPaperclipLight } from "react-icons/pi";
@@ -68,7 +66,6 @@ export function ShelfDetails() {
 
   const isReading = book?.status === 'Reading'
   const isWantRead = book?.status === 'wantToRead'
-  const isReaded = book?.status === 'Readed'
 
   useEffect(() => {
     loadBook();
@@ -78,7 +75,6 @@ export function ShelfDetails() {
   useEffect(() => {
     if(!book) return;
     setCurrentPage(book?.progress)
-    console.log(availableStatus)
   }, [book])
 
   async function loadBook() {

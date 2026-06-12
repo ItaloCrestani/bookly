@@ -31,10 +31,8 @@ export function Home() {
 
   useEffect(() => {
     if(loadingAuth) {
-      return console.log('carregando')
+      return console.log('carregando...')
     }
-
-    console.log(user)
   }, [user, loadingAuth])
 
   useEffect(() => {
@@ -51,7 +49,7 @@ export function Home() {
 
     const delay = setTimeout(() => {
       searchBooks()
-    }, 800)
+    }, 400)
 
     return () => clearTimeout(delay)
   }, [search])

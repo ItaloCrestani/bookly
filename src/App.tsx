@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router"
 
 import { Public } from "./routes/Public";
+import { Private } from "./routes/Private";
 
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/shelf',
-        element: <Bookshelf/>
+        element: <Private><Bookshelf/></Private>
       },
     ]
   },
