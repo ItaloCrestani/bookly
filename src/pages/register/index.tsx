@@ -70,7 +70,7 @@ export function Register() {
   return(
    <div className="flex min-h-dvh">
     <div
-    className="relative -z-2 hidden flex-col flex-1 px-6 py-8 bg-cover bg-center lg:flex" 
+    className="relative z-0 hidden flex-col flex-1 px-6 py-8 bg-cover bg-center lg:flex" 
     style={{backgroundImage: `url(${bg})`}}
     >
       <span className="absolute -z-1 inset-0 bg-linear-to-r from-[#04080ee9] from-50%"/>
@@ -205,7 +205,7 @@ export function Register() {
             whileTap={{scale: 0.98}}
             transition={{duration: 0.2}}
             >
-              Entrar
+              Cadastrar
             </motion.button>
 
             <div className="flex items-center gap-4">
@@ -227,7 +227,7 @@ export function Register() {
             transition={{duration: 0.2}}
             >
               <FcGoogle size={24}/>
-              Entrar com Google
+              Criar com Google
             </motion.button>
 
             <p className="flex justify-center gap-2 mt-6 text-[#8C929B] text-[14px]">

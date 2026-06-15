@@ -1,5 +1,5 @@
-import bg from "../../assets/bglogin.png"
-import logo from "../../assets/logo.svg"
+import bg from "../../assets/bglogin.png";
+import logo from "../../assets/logo.svg";
 import { GiBookshelf } from "react-icons/gi";
 import { FaRegStar } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
@@ -63,7 +63,7 @@ export function Login() {
   return(
    <div className="flex min-h-dvh">
     <div
-    className="relative -z-2 hidden flex-col flex-1 px-6 py-8 bg-cover bg-center lg:flex" 
+    className="relative z-0 hidden flex-col flex-1 px-6 py-8 bg-cover bg-center lg:flex" 
     style={{backgroundImage: `url(${bg})`}}
     >
       <span className="absolute -z-1 inset-0 bg-linear-to-r from-[#04080ee9] from-50%"/>

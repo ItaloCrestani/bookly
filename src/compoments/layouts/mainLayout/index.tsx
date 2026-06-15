@@ -7,7 +7,7 @@ export function MainLayout() {
     <div className="flex min-h-dvh bg-(--bg)">
       <Sidebar/>
 
-      <div className="flex-1 min-w-0 px-10">
+      <div className="flex-1 min-w-0 px-2 lg:px-10">
       <MainHeader/>
       <Outlet/>
       </div>

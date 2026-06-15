@@ -10,7 +10,7 @@ export function ReadedCard({ book }: { book: BookProps }) {
   return(
     <motion.button
     onClick={() => navigate(`/shelf/${book.id}`)}
-    className="relative flex flex-col shrink-0 w-36 h-76 bg-(--bg-3) border border-(--border) rounded-xl overflow-hidden cursor-pointer"
+    className="relative flex flex-col shrink-0 w-36 h-70 bg-(--bg-3) border border-(--border) rounded-xl overflow-hidden cursor-pointer"
     whileHover={{scale: 1.02}}
     whileTap={{scale: 0.98}}
     transition={{duration: 0.2}}
@@ -26,7 +26,7 @@ export function ReadedCard({ book }: { book: BookProps }) {
           <p className="text-[13px] text-(--text-3) line-clamp-1 text-left">{book.author}</p>
         </div>
         
-        <div className="flex gap-1 text-(--text-3)">
+        <div className="hidden gap-1 text-(--text-3)">
           {Array.from({ length: book.stars }).map((_, index) => (
             <IoMdStar key={index} />
           ))}

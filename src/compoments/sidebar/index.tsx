@@ -1,4 +1,5 @@
 import logo from "../../assets/logo.svg"
+import logoLight from "../../assets/logolight.svg"
 import { MdOutlineExplore } from "react-icons/md";
 import {  RiBookShelfLine, RiHeartLine } from "react-icons/ri";
 import { LuBookOpen } from "react-icons/lu";
@@ -73,10 +74,10 @@ export function Sidebar() {
       borderTopRightRadius: radius,
       borderBottomRightRadius: radius,
     }}
-    className="sticky top-0 flex flex-col w-52.5 h-dvh px-4 py-8 bg-(--bg-2) border-r-2 border-(--border)"
+    className="sticky top-0 lg:flex flex-col w-52.5 h-dvh px-4 py-8 bg-(--bg-2) border-r-2 border-(--border) hidden"
     >
       <div className="px-2">
-        <img src={logo} className="w-fit h-8"/>
+        <img src={lightMode ? logoLight : logo} className="w-fit h-8"/>
       </div>
       
       <nav className="flex flex-col gap-5 pt-15">

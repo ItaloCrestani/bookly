@@ -55,6 +55,9 @@
   --border-reading: #79ddffa1;
   --border-readed: #7deaada1;
   --border-delete: #ea7d7da1;
+
+  --bg-modal: #393e49d4;
+  --hover-modal: #8c929b67;
 }
 
 .light {
@@ -107,6 +110,9 @@
   --border-reading: #79ddffa1;
   --border-readed: #7deaada1;
   --border-delete: #ea7d7da1;
+
+  --bg-modal: #dee0e6d4;
+  --hover-modal: #b0b5bd67;
 }
 
 .swiper-button-next,

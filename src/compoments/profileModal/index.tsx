@@ -1,11 +1,11 @@
 import { GoSignOut } from "react-icons/go";
+import toast from "react-hot-toast";
 
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { signOut } from "firebase/auth"
 import { auth } from "../../services/firebaseConnection";
 import { AuthContext } from "../../context/AuthContext";
-import toast from "react-hot-toast";
 
 export function ProfileModal() {
   const { user } = useContext(AuthContext);
@@ -27,9 +27,9 @@ export function ProfileModal() {
     }
   }, [])
 
-  function loginOut() {
-    navigate('/')
-    signOut(auth)
+  async function loginOut() {
+    await signOut(auth)
+    navigate('/login')
     toast.success("Conta deslogada")
   }
 

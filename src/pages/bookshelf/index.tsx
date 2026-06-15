@@ -192,7 +192,7 @@ export function Bookshelf() {
                 </motion.div>
               </SwiperSlide>
             ))}
-            <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+            <span className="absolute top-0 right-0 z-1 h-full w-10 bg-linear-to-l from-(--bg) pointer-events-none" />
           </Swiper>
         )}
       </div>
