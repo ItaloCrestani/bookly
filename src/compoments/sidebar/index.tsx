@@ -49,7 +49,7 @@ export function Sidebar() {
     const buttons = [
       { path: '/', label: 'Explorar', icon: <MdOutlineExplore size="20px"/> },
       { path: '/shelf', label: 'Minha Estante', icon: <RiBookShelfLine size="20px"/> },
-      { path: '/favoritos', label: 'Favoritos', icon: <RiHeartLine size="20px"/> },
+      // { path: '/favoritos', label: 'Favoritos', icon: <RiHeartLine size="20px"/> },
     ]
 
     return buttons.map(button => {

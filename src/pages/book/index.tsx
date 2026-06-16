@@ -28,6 +28,7 @@ export function BookDetails() {
   const [ authorBooks, setAuthorBooks ] = useState<ReturnType<typeof formatAuthorBooks>[]>([]);
   const [ loading, setLoading ] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [ showDescription, setShowDescription ] = useState(false);
 
   useEffect(() => {
     loadBook();
@@ -196,7 +197,16 @@ export function BookDetails() {
 
         <div className="flex flex-col gap-2 py-6 mt-6 border-t border-b border-(--border)">
           <h2 className="text-[16px] text-(--text-1) font-semibold">Sinopse</h2>
-          <p className="text-[12px] text-(--text-3)">{book?.description ? book.description.replace(/<[^>]*>/g, '') : <Skeleton count={6} />}</p>
+          <p className={`text-[12px] text-(--text-3) ${!showDescription ? "line-clamp-9" : ""}`}>{book?.description ? book.description.replace(/<[^>]*>/g, '') : <Skeleton count={6} />}</p>
+
+          {book?.description && (
+            <button 
+            className="w-fit text-[12px] text-(--color) font-medium cursor-pointer"
+            onClick={() => setShowDescription(prev => !prev)}
+            >
+              {showDescription ? "Ler menos" : "Ler mais"}
+            </button>
+          )}
         </div>
 
         <div className="flex gap-16 py-6 border-b border-(--border) text-[14px] text-(--text-3) font-medium">

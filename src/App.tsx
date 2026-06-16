@@ -9,6 +9,7 @@ import { Home } from "./pages/home";
 import { Bookshelf } from "./pages/bookshelf";
 import { BookDetails } from "./pages/book";
 import { ShelfDetails } from "./pages/shelfDetails";
+import { NotFound } from "./pages/notfound";
 import { MainLayout } from "./compoments/layouts/mainLayout";
 import { DetailsLayout } from "./compoments/layouts/detailsLayout";
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Public><Register/></Public>
+  },
+  {
+    path: '*',
+    element: <NotFound />
   }
 ])
 
