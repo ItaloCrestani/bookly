@@ -2,42 +2,34 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import { getFeaturedBooks, getSuggestions } from "../../services/googleBooks";
+import { getSuggestions } from "../../services/googleBooks";
 
 import { MainCard } from "../../compoments/cards/mainCard";
 import { Suggestion } from "../../compoments/suggestion";
-import { MainCardSkeleton } from "../../compoments/skeleton/mainCardSkeleton";
+import { classicBooks, featuredBooks, fictionBooks, nationalBooks } from "../../data/featuredBooks";
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from "swiper/modules"
 
 export interface BooksProps {
   id: string;
-  isbn: string;
   image: string;
   title: string;
   author: string;
   genre: string;
-  year: string;
 }
 
 export function Home() {
-  const { user, loadingAuth } = useContext(AuthContext)
-  const [ featBooks, setFeatBooks ] = useState<BooksProps[]>([])
-  const [ search, setSearch] = useState("")
-  const [suggestions, setSuggestions] = useState<BooksProps[]>([])
-  const [showSuggestions, setShowSuggestions] = useState(false)
-  const [ loadingBooks, setLoadingBooks ] = useState(true)
+  const { user, loadingAuth } = useContext(AuthContext);
+  const [ search, setSearch] = useState("");
+  const [suggestions, setSuggestions] = useState<BooksProps[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
     if(loadingAuth) {
       return console.log('carregando...')
     }
   }, [user, loadingAuth])
-
-  useEffect(() => {
-    loadBooks();
-  }, [])
 
   useEffect(() => {
     if(search.trim().length === 0) {
@@ -54,17 +46,6 @@ export function Home() {
     return () => clearTimeout(delay)
   }, [search])
 
-  async function loadBooks() {
-    try {
-      setLoadingBooks(true)
-      
-      const booksData = await getFeaturedBooks()
-      
-      setFeatBooks(booksData)
-    } finally {
-      setLoadingBooks(false)
-    }
-  }
 
   async function searchBooks() {
     const suggestionsData = await getSuggestions(search)
@@ -90,40 +71,119 @@ export function Home() {
       {showSuggestions && <Suggestion data={suggestions} />}
     </div>
 
-    <div className="flex flex-col gap-1 mb-4">
-      <h2 className="text-[20px] text-(--text-2) font-semibold">Em destaque</h2>
-      <p className="text-[12px] text-(--text-3)">Livros populares para descobrir</p>
+    <div className="flex flex-col gap-8">
+      <div>
+        <div className="flex flex-col gap-1 mb-4">
+          <h2 className="text-[20px] text-(--text-2) font-semibold">Em destaque</h2>
+          <p className="text-[12px] text-(--text-3)">Livros populares para descobrir</p>
+        </div>
+        <Swiper
+        className="relative"
+        modules={[Navigation]}
+        slidesPerGroupAuto
+        navigation
+        spaceBetween={16}
+        slidesPerView={"auto"}
+        >
+          {featuredBooks.map(book => (
+            <SwiperSlide className="w-fit!" key={book.id}>
+              <MainCard
+              image={book.image}
+              title={book.title}
+              author={book.author}
+              genre={book.genre}
+              id={book.id}
+              />
+            </SwiperSlide>
+          ))}
+          <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+        </Swiper>
+      </div>
+
+      <div>
+        <div className="flex flex-col gap-1 mb-4">
+          <h2 className="text-[20px] text-(--text-2) font-semibold">Clássicos</h2>
+          <p className="text-[12px] text-(--text-3)">Clássicos da literatura mundial</p>
+        </div>
+        <Swiper
+        className="relative"
+        modules={[Navigation]}
+        slidesPerGroupAuto
+        navigation
+        spaceBetween={16}
+        slidesPerView={"auto"}
+        >
+          {classicBooks.map(book => (
+            <SwiperSlide className="w-fit!" key={book.id}>
+              <MainCard
+              image={book.image}
+              title={book.title}
+              author={book.author}
+              genre={book.genre}
+              id={book.id}
+              />
+            </SwiperSlide>
+          ))}
+          <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+        </Swiper>
+      </div>
+
+      <div>
+        <div className="flex flex-col gap-1 mb-4">
+          <h2 className="text-[20px] text-(--text-2) font-semibold">Nacionais</h2>
+          <p className="text-[12px] text-(--text-3)">Principais da literatura brasileira</p>
+        </div>
+        <Swiper
+        className="relative"
+        modules={[Navigation]}
+        slidesPerGroupAuto
+        navigation
+        spaceBetween={16}
+        slidesPerView={"auto"}
+        >
+          {nationalBooks.map(book => (
+            <SwiperSlide className="w-fit!" key={book.id}>
+              <MainCard
+              image={book.image}
+              title={book.title}
+              author={book.author}
+              genre={book.genre}
+              id={book.id}
+              />
+            </SwiperSlide>
+          ))}
+          <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+        </Swiper>
+      </div>
+
+      <div> 
+        <div className="flex flex-col gap-1 mb-4">
+          <h2 className="text-[20px] text-(--text-2) font-semibold">Ficção</h2>
+          <p className="text-[12px] text-(--text-3)">Mergulhe em novos mundos cheios de aventuras</p>
+        </div>
+        <Swiper
+        className="relative"
+        modules={[Navigation]}
+        slidesPerGroupAuto
+        navigation
+        spaceBetween={16}
+        slidesPerView={"auto"}
+        >
+          {fictionBooks.map(book => (
+            <SwiperSlide className="w-fit!" key={book.id}>
+              <MainCard
+              image={book.image}
+              title={book.title}
+              author={book.author}
+              genre={book.genre}
+              id={book.id}
+              />
+            </SwiperSlide>
+          ))}
+          <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+        </Swiper>
+      </div>
     </div>
-
-    <Swiper
-    className="relative"
-    modules={[Navigation]}
-    slidesPerGroupAuto
-    navigation
-    spaceBetween={16}
-    slidesPerView={"auto"}
-    >
-      {
-      loadingBooks 
-      ? Array.from({ length: 10 }).map((_, index) => (
-          <SwiperSlide className="w-fit!" key={index}>
-            <MainCardSkeleton />
-          </SwiperSlide>
-        ))
-      : featBooks.map(book => (
-        <SwiperSlide className="w-fit!" key={book.id}>
-          <MainCard
-          image={book.image}
-          title={book.title}
-          author={book.author}
-          genre={book.genre}
-          id={book.id}
-          />
-        </SwiperSlide>
-      ))}
-      <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
-    </Swiper>
-
    </div> 
   )
 }

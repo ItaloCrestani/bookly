@@ -47,7 +47,7 @@ export function BookDetails() {
 
       const details = await getBooksId(id);
       setBook(details);
-      
+
       const author = await getBooksAuthor(details.author);
       setAuthorBooks(author);
     } catch(e) {
@@ -197,7 +197,19 @@ export function BookDetails() {
 
         <div className="flex flex-col gap-2 py-6 mt-6 border-t border-b border-(--border)">
           <h2 className="text-[16px] text-(--text-1) font-semibold">Sinopse</h2>
-          <p className={`text-[12px] text-(--text-3) ${!showDescription ? "line-clamp-9" : ""}`}>{book?.description ? book.description.replace(/<[^>]*>/g, '') : <Skeleton count={6} />}</p>
+          
+          {!book ? (
+            <Skeleton count={6} />
+          ) : book.description ? (
+            <p className={`text-[12px] text-(--text-3) ${!showDescription ? "line-clamp-9" : ""}`}>
+              {book.description.replace(/<[^>]*>/g, '')}
+            </p>
+          ) : (
+            <p className="text-[12px] text-(--text-3)">
+              Este livro não possui descrição.
+            </p>
+          )
+        }
 
           {book?.description && (
             <button 

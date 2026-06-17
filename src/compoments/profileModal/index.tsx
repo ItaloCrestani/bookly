@@ -1,4 +1,5 @@
-import { GoSignOut } from "react-icons/go";
+import { GoSignIn, GoSignOut } from "react-icons/go";
+import { FaRegUser } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 import { useContext, useEffect, useRef, useState } from "react";
@@ -8,9 +9,10 @@ import { auth } from "../../services/firebaseConnection";
 import { AuthContext } from "../../context/AuthContext";
 
 export function ProfileModal() {
-  const { user } = useContext(AuthContext);
+  const { user, signed } = useContext(AuthContext);
   const navigate = useNavigate();
   const [ modalOpen, setModalOpen] = useState(false);
+  const [ lightMode, setLightMode] = useState(document.documentElement.classList.contains('light'));
   const modalRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -27,31 +29,71 @@ export function ProfileModal() {
     }
   }, [])
 
+    useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+
+    if (savedTheme === 'light') {
+      document.documentElement.classList.add('light')
+      setLightMode(true)
+    }
+  }, [])
+
   async function loginOut() {
     await signOut(auth)
     navigate('/login')
     toast.success("Conta deslogada")
   }
 
+  function toggleTheme() {
+    document.documentElement.classList.toggle('light')
+
+    const isLight = document.documentElement.classList.contains('light')
+
+    setLightMode(isLight)
+
+    localStorage.setItem('theme', isLight ? 'light' : 'dark')
+
+  }
+
   return (
     <div className="relative" ref={modalRef}>
       <button
-      className="w-8 h-8 font-semibold text-[20px] text-[#e9eeff] bg-(--color-2) rounded-full cursor-pointer hover:bg-(--color-2)/80 duration-200"
+      className="w-8 h-8 md:w-10 md:h-10 lg:w-8 lg:h-8 flex items-center justify-center font-semibold text-[18px] md:text-[20px] text-[#e9eeff] bg-(--color-2) rounded-full cursor-pointer hover:bg-(--color-2)/80 duration-200"
       onClick={() => setModalOpen(!modalOpen)}
       >
-        {user?.name?.charAt(0).toUpperCase()}
+        {signed ? user?.name?.charAt(0).toUpperCase() : <FaRegUser size={18}/>}
       </button>
 
       {modalOpen && (
         <div 
-        className="absolute top-9 right-0 w-40 p-3 bg-(--bg-3) border border-(--border) rounded-xl">
+        className="absolute -top-22 lg:top-9 right-0 flex flex-col gap-4 w-42 p-3 bg-(--bg-3) border border-(--border) rounded-xl">
           <button 
-          className="flex gap-1 cursor-pointer"
+          className={`flex gap-1 cursor-pointer ${!signed && "hidden"}`}
           onClick={loginOut}
           >
             <GoSignOut size={18} color="var(--text-2)"/>
             <p className="text-[14px] text-(--text-2)">Sair da conta</p>
           </button>
+
+          <button 
+          className={`flex gap-1 cursor-pointer ${signed && "hidden"}`}
+          onClick={() => navigate('/login')}
+          >
+            <GoSignIn size={18} color="var(--text-2)"/>
+            <p className="text-[14px] text-(--text-2)">Entrar na conta</p>
+          </button>
+
+          <div className="flex items-center gap-1 font-medium text-(--text-2) text-[14px] lg:hidden">
+            <p>Modo escuro</p>
+
+            <button 
+            className="flex items-center justify-center w-8 h-4.5 p-1 bg-(--bg-button) rounded-full cursor-pointer"
+            onClick={toggleTheme}
+            >
+              <span className={`bg-white w-3 h-3 rounded-full transition-transform duration-300 ${lightMode ? '-translate-x-2' : 'translate-x-2'}`}/>
+            </button>
+              
+          </div>
         </div>
       )}
     </div>

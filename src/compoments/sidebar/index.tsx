@@ -1,7 +1,7 @@
 import logo from "../../assets/logo.svg"
 import logoLight from "../../assets/logolight.svg"
 import { MdOutlineExplore } from "react-icons/md";
-import {  RiBookShelfLine, RiHeartLine } from "react-icons/ri";
+import {  RiBookShelfLine } from "react-icons/ri";
 import { LuBookOpen } from "react-icons/lu";
 import { IoMoonOutline } from "react-icons/io5";
 import { motion, useScroll, useTransform } from "framer-motion";

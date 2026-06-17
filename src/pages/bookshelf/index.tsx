@@ -82,7 +82,7 @@ export function Bookshelf() {
   }
 
   return (
-    <div className="flex flex-col gap-9 pb-4">
+    <div className="flex flex-col gap-9">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2 text-(--text-reading)">
           <HiOutlineBookOpen size={20}/>

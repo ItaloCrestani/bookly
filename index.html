@@ -5,6 +5,36 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bookly</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #050911;
+      }
+
+      #initial-loader {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #050911;
+      }
+
+      .spinner {
+        width: 42px;
+        height: 42px;
+        border: 3px solid #1a2230;
+        border-top-color: #9674ff;
+        border-radius: 100%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root">
@@ -14,35 +44,4 @@
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
-
-  <style>
-    html,
-    body {
-      margin: 0;
-      background: #050911;
-    }
-
-    #initial-loader {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #050911;
-    }
-
-    .spinner {
-      width: 42px;
-      height: 42px;
-      border: 3px solid #1a2230;
-      border-top-color: #9674ff;
-      border-radius: 100%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
 </html>

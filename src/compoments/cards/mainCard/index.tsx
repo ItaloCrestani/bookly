@@ -1,16 +1,19 @@
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 interface CardProps {
   image: string;
   title: string;
-  author: string;
+  author: string | undefined;
   genre: string;
   id: string;
 }
 
 export function MainCard({image, title, author, genre, id}: CardProps) {
   const navigate = useNavigate();
+  const [ imageLoaded, setImageLoaded ] = useState(false);
 
   return(
     <motion.button
@@ -20,10 +23,20 @@ export function MainCard({image, title, author, genre, id}: CardProps) {
     whileTap={{scale: 0.98}}
     transition={{duration: 0.2}}
     >
-      <img
-      className="w-full h-62 object-cover object-center"
-      src={image}
-      />
+
+      {!imageLoaded && (
+          <Skeleton
+            height={248}
+            className="-mb-1"
+          />
+      )}
+
+        <img
+        className={`w-full h-62 object-cover object-center ${imageLoaded ? '' : 'hidden'}`}
+        src={image}
+        onLoad={() => setImageLoaded(true)}
+        />
+
         
       <div className="flex flex-col flex-1 gap-1 px-2 py-2">
         <h1 className="text-[14px] text-(--text) font-medium line-clamp-2 text-left">{title}</h1>

@@ -1,23 +1,18 @@
-import { featuredBooks } from "../data/featuredBooks"
-
 const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
 
 function formatBook(book: any) {
   return {
     id: book.id,
-    isbn: book.volumeInfo.industryIdentifiers[0].identifier,
     image: book.volumeInfo.imageLinks?.thumbnail,
     title: book.volumeInfo.title,
     author: book.volumeInfo.authors?.[0],
     genre: book.volumeInfo.categories?.[0],
-    year: book.volumeInfo.publishedDate?.split('-')[0],
   }
 }
 
 export function formatDetailsBook(book: any) {
   return {
     id: book.id,
-    isbn: book.volumeInfo.industryIdentifiers[0].identifier,
     image: book.volumeInfo.imageLinks?.thumbnail,
     title: book.volumeInfo.title,
     author: book.volumeInfo.authors?.[0],
@@ -37,33 +32,33 @@ export function formatAuthorBooks(book: any) {
   }
 }
 
-export async function getFeaturedBooks() {
-  const responses = await Promise.all(
-    featuredBooks.map(async (title) => {
-      const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&printType=books&langRestrict=pt&maxResults=5&key=${API_KEY}`
-      )
+// export async function getFeaturedBooks() {
+//   const responses = await Promise.all(
+//     fictionBooks.map(async (title) => {
+//       const response = await fetch(
+//           `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&printType=books&langRestrict=pt&maxResults=5&key=${API_KEY}`
+//       )
 
-      const data = await response.json()
+//       const data = await response.json()
 
-      const validBook = data.items?.find((book: any) => {
-        return (
-          book.volumeInfo?.industryIdentifiers &&
-          book.volumeInfo?.imageLinks?.thumbnail &&
-          book.volumeInfo?.categories
-        )
-      })
+//       const validBook = data.items?.find((book: any) => {
+//         return (
+//           book.volumeInfo?.industryIdentifiers &&
+//           book.volumeInfo?.imageLinks?.thumbnail &&
+//           book.volumeInfo?.categories
+//         )
+//       })
 
-      if (!validBook) {
-        return null
-      }
+//       if (!validBook) {
+//         return null
+//       }
 
-      return formatBook(validBook)
-    })
-  )
+//       return formatBook(validBook)
+//     })
+//   )
 
-  return responses.filter((book) => book !== null)
-}
+//   return responses.filter((book) => book !== null)
+// }
 
 export async function getSuggestions(title: string) {
   const response = await fetch(
@@ -85,8 +80,8 @@ export async function getBooksId(id: string) {
   )
 
   const data = await response.json()
-  console.log(data)
-  return formatDetailsBook(data)
+
+  return formatDetailsBook(data);
 }
 
 export async function getBooksAuthor(author: string) {
