@@ -7,6 +7,7 @@ function formatBook(book: any) {
     title: book.volumeInfo.title,
     author: book.volumeInfo.authors?.[0],
     genre: book.volumeInfo.categories?.[0],
+    year: book.volumeInfo.publishedDate?.split('-')[0],
   }
 }
 

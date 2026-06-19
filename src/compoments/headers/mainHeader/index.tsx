@@ -1,4 +1,4 @@
-import logo from '../../../assets/logo.svg'
+import explore from '../../../assets/explore.png'
 
 import { useLocation } from "react-router"
 import { ProfileModal } from "../../profileModal";
@@ -20,10 +20,10 @@ export function MainHeader() {
   const current = headerContent[pathname as keyof typeof headerContent]
 
   return (
-    <header className="flex flex-1 justify-between items-center py-8">
-      <div className="flex flex-col gap-1">
-        <h1 className="font-semibold text-2xl text-(--text-2)">{current.title}</h1>
-        <p className="text-[14px] text-(--text-3)">
+    <header className="flex flex-1 justify-between items-center md:items-start py-3 md:py-8">
+      <div className="flex flex-col w-41 md:w-58 gap-1">
+        <h1 className="font-semibold text-xl md:text-2xl text-(--text-2)">{current.title}</h1>
+        <p className="text-[10px] md:text-[14px] text-(--text-3)">
           {current.subtitle}
         </p>
       </div>
@@ -32,8 +32,8 @@ export function MainHeader() {
         <ProfileModal />
       </div>
 
-      <div className="lg:hidden">
-        <img src={logo} className='h-9' />
+      <div className="md:hidden">
+        <img src={explore} className='h-26' />
       </div>
   </header>
 )

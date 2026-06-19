@@ -12,12 +12,15 @@ import "swiper/css/navigation"
 import "swiper/css/pagination"
 
 import { Toaster } from 'react-hot-toast'
+import { ThemeProvider } from './context/ThemeContext'
 
 createRoot(document.getElementById('root')!).render(
   <>
     <Toaster position="top-center" reverseOrder={false}/>
     <AuthProvider>
+      <ThemeProvider>
       <RouterProvider router={router}/>
+      </ThemeProvider>
     </AuthProvider>
   </>
 )

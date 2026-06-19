@@ -7,12 +7,13 @@ import { useNavigate } from "react-router";
 import { signOut } from "firebase/auth"
 import { auth } from "../../services/firebaseConnection";
 import { AuthContext } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export function ProfileModal() {
   const { user, signed } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext)
   const navigate = useNavigate();
   const [ modalOpen, setModalOpen] = useState(false);
-  const [ lightMode, setLightMode] = useState(document.documentElement.classList.contains('light'));
   const modalRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -29,39 +30,19 @@ export function ProfileModal() {
     }
   }, [])
 
-    useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-
-    if (savedTheme === 'light') {
-      document.documentElement.classList.add('light')
-      setLightMode(true)
-    }
-  }, [])
-
   async function loginOut() {
     await signOut(auth)
     navigate('/login')
     toast.success("Conta deslogada")
   }
 
-  function toggleTheme() {
-    document.documentElement.classList.toggle('light')
-
-    const isLight = document.documentElement.classList.contains('light')
-
-    setLightMode(isLight)
-
-    localStorage.setItem('theme', isLight ? 'light' : 'dark')
-
-  }
-
   return (
     <div className="relative" ref={modalRef}>
       <button
-      className="w-8 h-8 md:w-10 md:h-10 lg:w-8 lg:h-8 flex items-center justify-center font-semibold text-[18px] md:text-[20px] text-[#e9eeff] bg-(--color-2) rounded-full cursor-pointer hover:bg-(--color-2)/80 duration-200"
+      className="w-7 h-7 md:w-10 md:h-10 lg:w-8 lg:h-8 flex items-center justify-center font-semibold text-[16px] md:text-[20px] text-[#e9eeff] bg-(--color-2) rounded-full cursor-pointer hover:bg-(--color-2)/80 duration-200"
       onClick={() => setModalOpen(!modalOpen)}
       >
-        {signed ? user?.name?.charAt(0).toUpperCase() : <FaRegUser size={18}/>}
+        {signed ? user?.name?.charAt(0).toUpperCase() : <FaRegUser size={16}/>}
       </button>
 
       {modalOpen && (
@@ -75,7 +56,7 @@ export function ProfileModal() {
             <p className="text-[14px] text-(--text-2)">Sair da conta</p>
           </button>
 
-          <button 
+          <button
           className={`flex gap-1 cursor-pointer ${signed && "hidden"}`}
           onClick={() => navigate('/login')}
           >
@@ -90,7 +71,7 @@ export function ProfileModal() {
             className="flex items-center justify-center w-8 h-4.5 p-1 bg-(--bg-button) rounded-full cursor-pointer"
             onClick={toggleTheme}
             >
-              <span className={`bg-white w-3 h-3 rounded-full transition-transform duration-300 ${lightMode ? '-translate-x-2' : 'translate-x-2'}`}/>
+              <span className={`bg-white w-3 h-3 rounded-full transition-transform duration-300 ${theme === "light" ? '-translate-x-2' : 'translate-x-2'}`}/>
             </button>
               
           </div>
