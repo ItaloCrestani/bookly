@@ -8,15 +8,15 @@ type EmptyProps = {
 
 export function EmptyCard({icon, title, description}: EmptyProps) {
   return(
-    <div className="flex flex-col items-center justify-center gap-3 py-12 bg-(--bg-2) border border-dashed border-(--border-3) rounded-xl hover:bg-(--bg-3)/50 duration-300">
+    <div className="flex flex-col items-center justify-center gap-1 md:gap-3 py-8 md:py-12 bg-(--bg-2) border border-dashed border-(--border-3) rounded-xl hover:bg-(--bg-3)/50 duration-300">
       {icon}
 
       <div className="text-center">
-        <h3 className="font-medium text-(--text-1)">
+        <h3 className="text-[12px] md:text-[16px] font-medium text-(--text-1)">
           {title}
         </h3>
 
-        <p className="text-sm text-(--text-3)">
+        <p className="text-[10px] md:text-sm text-(--text-3)">
           {description}
         </p>
       </div>

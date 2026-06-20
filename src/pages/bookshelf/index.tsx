@@ -108,11 +108,11 @@ export function Bookshelf() {
                 </motion.div>
               </SwiperSlide>
             ))}
-            <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+            <span className="hidden md:block absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
           </Swiper>
         ) : readingBooks.length === 0 ? (
           <EmptyCard
-          icon={<HiOutlineBookOpen size={40} color="var(--text-reading)"/>}
+          icon={<HiOutlineBookOpen className="size-6 md:size-10" color="var(--text-reading)"/>}
           title="Nenhum livro em leitura"
           description="Adicione um livro para acompanhar seu progresso."
           />
@@ -135,7 +135,7 @@ export function Bookshelf() {
                 </motion.div>
               </SwiperSlide>
             ))}
-            <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)"/>
+            <span className="hidden md:block absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)"/>
           </Swiper>
         )}
       </div>
@@ -165,11 +165,11 @@ export function Bookshelf() {
                 </motion.div>
               </SwiperSlide>
             ))}
-            <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+            <span className="hidden md:block absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
           </Swiper>
         ) : readBooks.length === 0 ? (
           <EmptyCard
-          icon={<CiBookmark size={40} color="var(--text-read)"/>}
+          icon={<CiBookmark className="size-6 md:size-10" color="var(--text-read)"/>}
           title="Nenhum livro em lista"
           description="Adicione um livro que deseja ler."
           />
@@ -192,7 +192,7 @@ export function Bookshelf() {
                 </motion.div>
               </SwiperSlide>
             ))}
-            <span className="absolute top-0 right-0 z-1 h-full w-10 bg-linear-to-l from-(--bg) pointer-events-none" />
+            <span className="hidden md:block absolute top-0 right-0 z-1 h-full w-10 bg-linear-to-l from-(--bg) pointer-events-none" />
           </Swiper>
         )}
       </div>
@@ -226,7 +226,7 @@ export function Bookshelf() {
           </Swiper>
         ) : readedBooks.length === 0 ? (
           <EmptyCard
-          icon={<IoIosCheckmarkCircleOutline size={40} color="var(--text-readed)"/>}
+          icon={<IoIosCheckmarkCircleOutline className="size-6 md:size-10" color="var(--text-readed)"/>}
           title="Nenhum livro concluído"
           description="Adicione um livro que já leu."
           />
@@ -249,7 +249,7 @@ export function Bookshelf() {
                 </motion.div>
               </SwiperSlide>
             ))}
-            <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+            <span className="hidden md:block absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
           </Swiper>
         )}
       </div>

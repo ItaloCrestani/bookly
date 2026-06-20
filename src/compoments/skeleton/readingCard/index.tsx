@@ -3,12 +3,22 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 export function ReadingCardSkeleton() {
   return (
-    <div className="flex items-center w-96 h-44 bg-(--bg-3) border border-(--border) rounded-xl overflow-hidden">
-      <Skeleton
-        width={150}
-        height={176}
-        borderRadius={12}
-      />
+    <div className="flex items-center w-72 h-34 md:w-96 md:h-44 bg-(--bg-3) border border-(--border) rounded-xl overflow-hidden">
+      <div className='hidden md:block'>
+        <Skeleton
+          width={150}
+          height={176}
+          borderRadius={12}
+        />
+      </div>
+
+      <div className='block md:hidden'>
+        <Skeleton
+          width={90}
+          height={136}
+          borderRadius={12}
+        />
+      </div>
 
       <div className="flex-1 flex flex-col justify-between h-full py-4 px-3">
         <div>

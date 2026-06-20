@@ -130,7 +130,7 @@ export function Home() {
               />
             </SwiperSlide>
           ))}
-          <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+          <span className="hidden md:block absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
         </Swiper>
       </div>
 
@@ -158,7 +158,7 @@ export function Home() {
               />
             </SwiperSlide>
           ))}
-          <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+          <span className="hidden md:block absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
         </Swiper>
       </div>
 
@@ -186,7 +186,7 @@ export function Home() {
               />
             </SwiperSlide>
           ))}
-          <span className="absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
+          <span className="hidden md:block absolute top-0 right-0 z-1 h-full w-24 bg-linear-to-l from-(--bg)" />
         </Swiper>
       </div>
     </div>

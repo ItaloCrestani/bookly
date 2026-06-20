@@ -61,7 +61,7 @@ export function ReadCard({ book }: { book: BookProps }) {
 
   return(
     <motion.div 
-    className={`relative shrink-0 w-36 h-68 bg-(--bg-3) border border-(--border) rounded-xl cursor-pointer`}
+    className={`relative shrink-0 w-30 h-58 md:w-36 md:h-68 bg-(--bg-3) border border-(--border) rounded-xl cursor-pointer`}
     ref={modalRef}
     whileHover={{scale: 1.02}}
     whileTap={{scale: 0.98}}
@@ -72,13 +72,13 @@ export function ReadCard({ book }: { book: BookProps }) {
       className="flex flex-col w-full cursor-pointer overflow-hidden rounded-xl"
       >
         <img
-        className="w-full h-44 object-cover object-center"
+        className="w-full h-36 md:h-44 object-cover object-center"
         src={book.image}
         />
       
         <div className="flex flex-col gap-2 w-full px-3 py-4">
-          <h1 className="text-[14px] text-(--text) font-medium line-clamp-2 text-left">{book.title}</h1>
-          <p className="max-w-22 text-[13px] text-(--text-3) line-clamp-1 text-left">{book.author}</p>
+          <h1 className="text-[12px] md:text-[14px] text-(--text) font-medium line-clamp-2 text-left">{book.title}</h1>
+          <p className="max-w-19 md:max-w-22 text-[10px] md:text-[13px] text-(--text-3) line-clamp-1 text-left">{book.author}</p>
         </div>
       </button>
 
@@ -91,7 +91,7 @@ export function ReadCard({ book }: { book: BookProps }) {
 
       {modalOpen && (
         <motion.div 
-        className="absolute right-2 bottom-8 flex flex-col items-start p-1 text-[12px] text-(--text-1) bg-(--bg-modal) rounded-xl backdrop-blur-xs"
+        className="absolute right-2 bottom-8 flex flex-col items-start md:p-1 text-[12px] text-(--text-1) bg-(--bg-modal) rounded-xl backdrop-blur-xs"
         initial={{ opacity: 0, scale: 0.7, y: 40 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.2 }}
