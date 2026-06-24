@@ -1,8 +1,8 @@
 import { Outlet, ScrollRestoration } from "react-router";
 import { Sidebar } from "../../sidebar";
 import { MainHeader } from "../../headers/mainHeader";
-import { BottomNav } from "../../BottomNavigation";
 import { HeaderLogo } from "../../headers/headerLogo";
+import { BottomNav } from "../../BottomNavigation";
 
 export function MainLayout() {
   return (
@@ -11,14 +11,14 @@ export function MainLayout() {
       <Sidebar/>
 
       <div className="flex-1 min-w-0 pb-22 md:pb-28 lg:pb-4">
-      <HeaderLogo/>
+        <HeaderLogo/>
 
-      <div className="px-3 md:px-5 lg:px-10">
-        <MainHeader/>
-        <Outlet/>
-      </div>
-      
-      <BottomNav/>
+        <div className="px-3 md:px-5 lg:px-10">
+          <MainHeader/>
+          <Outlet/>
+        </div>
+        
+        <BottomNav/>
       </div>
     </div>
   )

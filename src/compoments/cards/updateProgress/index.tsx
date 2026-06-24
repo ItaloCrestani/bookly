@@ -36,7 +36,7 @@ export function ProgressCard({ pages, currentPage, setCurrentPage, updateProgres
       </div>
 
       <div className="flex w-full justify-between mt-3 pt-4 border-t border-(--border)">
-        <div className="flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <div className="p-2 bg-(--bg-button-hover) rounded-full">
             <CiBookmark size={24} color="var(--text-button)" />
           </div>
@@ -46,14 +46,15 @@ export function ProgressCard({ pages, currentPage, setCurrentPage, updateProgres
           </div>
         </div>
 
-        <div className="flex gap-6">
+        <div className="flex w-full md:w-fit justify-evenly gap-6">
           <div className="flex text-(--text-1) border border-(--border) rounded-xl overflow-hidden">
             <button 
             onClick={() => setCurrentPage((prev: number) => Math.max(prev - 1, 0))}
-            className="px-4 bg-(--bg-3) cursor-pointer"
+            className="px-5 bg-(--bg-3) cursor-pointer"
             >
               -
             </button>
+
             <input
             type="number"
             min={0}
@@ -66,13 +67,15 @@ export function ProgressCard({ pages, currentPage, setCurrentPage, updateProgres
             }}
             className="w-22 text-[14px] text-center bg-(--bg) outline-none"
             />
+
             <button
             onClick={() => setCurrentPage((prev: number) => Math.min(prev + 1, pages ?? 0))}
-            className="px-4 bg-(--bg-3) cursor-pointer"
+            className="px-5 bg-(--bg-3) cursor-pointer"
             >
               +
             </button>
           </div>
+
           <button
           onClick={() => updateProgress(currentPage)}
           className="px-4 py-2 font-semibold text-[12px] text-(--text-button) bg-(--bg-button) rounded-md cursor-pointer hover:bg-(--bg-button-hover) duration-300"

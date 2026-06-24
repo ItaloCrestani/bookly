@@ -33,16 +33,18 @@ export function DetailsHeader() {
   if(!buttonContent) return <Navigate to="/" replace />
 
   return (
-    <header className="flex flex-1 justify-between py-8">
+    <header className="flex flex-1 justify-between py-5 md:py-8">
       <button 
-      className="flex gap-2 items-center text-[14px] text-[#8C929B] cursor-pointer hover:text-[#8849EE] transition-colors"
+      className="flex gap-2 items-center text-[12px] md:text-[14px] text-[#8C929B] cursor-pointer hover:text-[#8849EE] active:text-[#8849EE] transition-colors"
       onClick={() => navigate(buttonContent.path)}
       >
         <GoArrowLeft/>
-        {buttonContent?.label}
+        {buttonContent.label}
       </button>
 
-    <ProfileModal />
+    <div className="hidden lg:block">
+      <ProfileModal />
+    </div>
   </header>
 )
 }

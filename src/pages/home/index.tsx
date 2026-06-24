@@ -49,7 +49,7 @@ export function Home() {
 
     const delay = setTimeout(() => {
       searchBooks()
-    }, 400)
+    }, 500)
 
     return () => clearTimeout(delay)
   }, [search])

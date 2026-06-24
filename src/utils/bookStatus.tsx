@@ -27,7 +27,7 @@ export const statusOptions: OptionProps[] = [
   {
     value: "wantToRead",
     title: "Quero ler",
-    icon: <CiBookmark size={30} color="var(--text-read)" />,
+    icon: <CiBookmark className="size-5 md:size-7.5" color="var(--text-read)" />,
     color: "--text-read",
     bg: "--bg-read",
     border: "--border-read",
@@ -37,7 +37,7 @@ export const statusOptions: OptionProps[] = [
   {
     value: "Reading",
     title: "Estou lendo",
-    icon: <HiOutlineBookOpen size={30} color="var(--text-reading)" />,
+    icon: <HiOutlineBookOpen className="size-5 md:size-7.5" color="var(--text-reading)" />,
     color: "--text-reading",
     bg: "--bg-reading",
     border: "--border-reading",
@@ -47,7 +47,7 @@ export const statusOptions: OptionProps[] = [
   {
     value: "Readed",
     title: "Já li",
-    icon: <IoIosCheckmarkCircleOutline size={30} color="var(--text-readed)" />,
+    icon: <IoIosCheckmarkCircleOutline className="size-5 md:size-7.5" color="var(--text-readed)" />,
     color: "--text-readed",
     bg: "--bg-readed",
     border: "--border-readed",

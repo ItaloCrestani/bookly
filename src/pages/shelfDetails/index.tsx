@@ -1,5 +1,5 @@
 import {  CiCalendar } from "react-icons/ci";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { LiaTrashAltSolid } from "react-icons/lia";
 import { FiUser } from "react-icons/fi";
 import { LuBook } from "react-icons/lu";
 import { PiPaperclipLight } from "react-icons/pi";
@@ -44,6 +44,7 @@ export function ShelfDetails() {
   const [ imageLoaded, setImageLoaded ] = useState(false);
   const [ currentPage, setCurrentPage ] = useState(0);
   const [ showDescription, setShowDescription ] = useState(false);
+  const [ showTitle, setShowTitle ] = useState(false);
 
   const availableActions = statusOptions.filter(
     status => status.value !== book?.status
@@ -159,16 +160,16 @@ export function ShelfDetails() {
 
 
   return (
-    <div className="flex gap-10 text-(--text-1) ">
-      <div className="w-60 shrink-0 text-(--text-2) font-medium">
-        <div className="w-full h-88 mb-6">
+    <div className="flex flex-col md:flex-row gap-10 text-(--text-1)">
+      <div className="flex md:block w-full md:w-60 gap-2 md:gap-0 shrink-0 text-(--text-2) font-medium">
+        <div className="w-full h-64 md:h-88 md:mb-6 rounded-xl overflow-hidden">
           {(!book?.image || !imageLoaded) && (
-            <Skeleton className="w-full h-88 border-2 border-(--border-3) rounded-xl" />
+            <Skeleton className="w-full h-63 md:h-87 border-2 border-(--border-3) rounded-xl!" />
           )}
           
           {book?.image && (
             <img
-              className={`w-full h-88 object-cover border-2 border-(--border-3) rounded-xl ${imageLoaded ? 'block' : 'hidden'}`}
+              className={`w-full h-64 md:h-88 object-cover border-2 border-(--border-3) rounded-xl ${imageLoaded ? 'block' : 'hidden'}`}
               src={book.image}
               alt={book.title}
               onLoad={() => setImageLoaded(true)}
@@ -176,37 +177,56 @@ export function ShelfDetails() {
           )}
         </div>
 
-        <div className="flex flex-col gap-2">
-          <p className="text-[14px] font-semibold">Mover para:</p>
+        <div className="flex flex-col w-120 gap-3 md:w-full">
+          <div className="md:hidden">
+            {book?.genre ? (
+              <div className="w-fit mt-auto mb-1 px-2.5 py-1 text-[9px] text-(--text-genre) font-medium bg-(--bg-genre) rounded-xl">
+                <span className="line-clamp-1">{book.genre}</span>
+              </div>
+            ) :
+              <Skeleton  width="40%"/>
+            }
+            <h1 
+            className={`mb-1 text-[16px] font-medium ${showTitle ? '' : 'line-clamp-2'}`}
+            onClick={() => setShowTitle(prev => !prev)}
+            >
+              {book?.title || <Skeleton />}
+            </h1>
+            <p className="text-[12px] text-(--text-3)">{book?.author || <Skeleton width="60%" />}</p>
+          </div>
+          
+          <div className="flex flex-col gap-2">
+            <p className="hidden md:block text-[14px] font-semibold">Mover para:</p>
 
-          {availableActions.map(action => (
-            <ButtonAction
-            key={action.value}
-            loading={loading}
-            action={() => updateStatus(action.value)}
-            icon={action.icon}
-            title={action.title}
-            subtitle={action.subtitle}
-            color={action.color}
-            bg={action.bg}
-            border={action.border}
-            hover={action.hover}
-            />
-          ))}
+            {availableActions.map(action => (
+              <ButtonAction
+              key={action.value}
+              loading={loading}
+              action={() => updateStatus(action.value)}
+              icon={action.icon}
+              title={action.title}
+              subtitle={action.subtitle}
+              color={action.color}
+              bg={action.bg}
+              border={action.border}
+              hover={action.hover}
+              />
+            ))}
 
-          <button 
-          className={`flex items-center gap-2 px-4 py-3 bg-(--bg-delete) border border-(--border-delete) rounded-lg hover:bg-(--hover-delete) transition-colors ${loading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-          onClick={deleteBook}
-          >
-          <FaRegTrashAlt size={20} color="var(--text-delete)" />
-          <p className="text-[14px] text-(--text-delete)">Excluir livro</p>
-        </button>
-
+            <button
+            className={`flex items-center gap-2 px-2 py-2.5 md:px-4 md:py-3 bg-(--bg-delete) border border-(--border-delete) rounded-lg hover:bg-(--hover-delete) active:bg-(--hover-delete) transition-colors ${loading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+            disabled={loading}
+            onClick={deleteBook}
+            >
+              <LiaTrashAltSolid className="size-5 md:size-7.5" color="var(--text-delete)" />
+              <p className="text-[14px] text-(--text-delete)">Excluir livro</p>
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="flex flex-col gap-6 w-160 min-w-0 overflow-hidden">
-        <div>
+      <div className="flex flex-col gap-6 max-w-160 min-w-0 overflow-hidden">
+        <div className="hidden md:block">
           {book?.genre && (
             <div className="w-fit px-2.5 py-1 text-[12px] text-(--text-genre) font-medium bg-(--bg-genre) rounded-xl">
               {book.genre}
@@ -216,11 +236,68 @@ export function ShelfDetails() {
           <p className="text-[18px] text-(--text-3)">{book?.author || <Skeleton width="40%" />}</p>
         </div>
 
+        <div className={`${isWantRead ? "hidden": ""} md:hidden`}>
+            <Swiper
+            modules={[Pagination]}
+            pagination={{ clickable: true }}
+            spaceBetween={16}
+            slidesPerView={1}
+            slidesPerGroupAuto
+            className="pb-8!"
+            >
+              {isReading && (
+                <SwiperSlide>
+                    <ProgressCard 
+                    pages={book?.pages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    updateProgress={updateProgress}
+                    />
+                </SwiperSlide>
+                )}
+
+              {!isWantRead && (
+                <SwiperSlide>
+                  <div className="flex flex-col items-center gap-3 p-4 bg-(--bg-1) border border-(--border) rounded-xl">
+                    <h2 className="w-full text-[14px] text-(--text-1) font-semibold">
+                      Resumo da leitura
+                    </h2>
+                    <ProgressCircle value={book?.progress ?? 0} max={book?.pages ?? 1} />
+                      <p className="text-[12px] text-(--text-3) font-semibold">
+                        Página {book?.progress ?? 0} de {book?.pages ?? 0}
+                      </p>
+                  </div>
+                </SwiperSlide>
+              )}
+            </Swiper>
+        </div>
+
+          {isReading && (
+            <div className="hidden md:block">
+              <ProgressCard
+              pages={book?.pages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              updateProgress={updateProgress}
+              />
+            </div>
+          )}
+
         <div className="flex flex-col gap-2 py-6 border-t border-b border-(--border)">
-          <h2 className="text-[16px] text-(--text-1) font-semibold">Sinopse</h2>
-          <p className={`text-[12px] text-(--text-3) ${!showDescription ? "line-clamp-9" : ""}`}>
-            {book?.description ? book.description.replace(/<[^>]*>/g, '') : <Skeleton count={6} />}
-          </p>
+          <h2 className="text-[14px] md:text-[16px] text-(--text-1) font-semibold">Sinopse</h2>
+
+          {!book ? (
+            <Skeleton width={640} count={9} />
+          ) : book.description ? (
+            <p className={`text-[12px] text-(--text-3) ${!showDescription ? "line-clamp-9" : ""}`}>
+              {book.description.replace(/<[^>]*>/g, '')}
+            </p>
+          ) : (
+            <p className="text-[12px] text-(--text-3)">
+              Este livro não possui descrição.
+            </p>
+          )
+          }
 
           {book?.description && (
             <button 
@@ -232,16 +309,7 @@ export function ShelfDetails() {
           )}
         </div>
 
-        {isReading && (
-          <ProgressCard 
-          pages={book?.pages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          updateProgress={updateProgress}
-          />
-        )}
-
-        <div className="flex gap-16 text-[14px] text-(--text-3) font-medium">
+        <div className="flex gap-16 text-[12px] md:text-[14px] text-(--text-3) font-medium">
           <div className="flex flex-col gap-3">
             <p className="flex items-center gap-2">
               <FiUser size={16} />
@@ -283,7 +351,7 @@ export function ShelfDetails() {
         </div>
 
         {!isWantRead && (
-        <div className="flex flex-col items-center gap-3 p-4 bg-(--bg-1) border border-(--border) rounded-xl">
+        <div className="hidden md:flex flex-col items-center gap-3 p-4 bg-(--bg-1) border border-(--border) rounded-xl">
           <h2 className="w-full text-[14px] text-(--text-1) font-semibold">Resumo da leitura</h2>
           <ProgressCircle value={book?.progress ?? 0} max={book?.pages ?? 1} />
             <p className="text-[12px] text-(--text-3) font-semibold">Página {book?.progress ?? 0} de {book?.pages ?? 0}</p>
@@ -298,48 +366,56 @@ export function ShelfDetails() {
           </div>
         </div>
 
-        <div className="max-w-67 pt-4 px-4 bg-(--bg-1) border border-(--border) rounded-xl">
-          <h2 className="mb-2 text-[16px] text-(--text-1) font-semibold">Outros livros do autor</h2>
-
-          <Swiper
-          modules={[Pagination]}
-          pagination={{ clickable: true }}
-          slidesPerView={3}
-          slidesPerGroup={3}
-          spaceBetween={16}
-          className="pb-8!"
-          >
-            {loading 
-            ? Array.from({ length: 10 }).map((_, index) => (
-              <SwiperSlide className="w-fit!" key={index}>
-                <div className="w-16">
-                  <Skeleton height={96}/>
-                </div>
-                <p className="pt-1.5 text-[10px]"><Skeleton count={2}/></p>
+          <div className="md:max-w-67 pt-4 px-4 bg-(--bg-1) border border-(--border) rounded-xl">
+            <h2 className="mb-2 text-[14px] md:text-[16px] text-(--text-1) font-semibold">
+              Outros livros do autor
+            </h2>
+            
+            <Swiper
+            modules={[Pagination]}
+            pagination={{ clickable: true }}
+            slidesPerView={'auto'}
+            slidesPerGroup={3}
+            spaceBetween={16}
+            className="pb-8!"
+            >
+              {loading && (
+                Array.from({ length: 10 }).map((_, index) => (
+                  <SwiperSlide className="w-fit!" key={index}>
+                    <div className="w-16">
+                      <Skeleton height={96}/>
+                    </div>
+                    <p className="pt-1.5 text-[10px]"><Skeleton count={2}/></p>
+                  </SwiperSlide>
+                ))
+              )}
+              
+              {authorBooks.map(book => (
+                <SwiperSlide className="w-fit!" key={book.id}>
+                  <motion.button
+                  className="w-16 cursor-pointer"
+                  onClick={() => navigate(`/book/${book.id}`)}
+                  whileHover={{scale: 1.02}} 
+                  whileTap={{scale: 0.98}}
+                  transition={{duration: 0.2}}
+                  >
+                    <img
+                    className="w-full h-24 object-cover border border-(--border) rounded"
+                    src={book.image}
+                    alt={book.title}
+                    />
+                    <p className="pt-1 text-center text-[10px] text-(--text-1) line-clamp-2 text-ellipsis">
+                      {book.title}
+                    </p>
+                  </motion.button>
               </SwiperSlide>
-              ))
-            : authorBooks.map(book => (
-              <SwiperSlide className="w-fit!" key={book.id}>
-                <motion.button
-                className="w-16 cursor-pointer"
-                onClick={() => navigate(`/book/${book.id}`)}
-                whileHover={{scale: 1.02}} 
-                whileTap={{scale: 0.98}}
-                transition={{duration: 0.2}}
-                >
-                  <img
-                  className="w-full h-24 object-cover border border-(--border) rounded"
-                  src={book.image}
-                  alt={book.title}
-                  />
-                  <p className="pt-1 text-center text-[10px] text-(--text-1) line-clamp-2 text-ellipsis">
-                    {book.title}
-                  </p>
-                </motion.button>
-            </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+              ))}
+
+              {authorBooks.length === 0 && !loading && (
+                <p className="text-[12px] text-(--text-3)">Nenhum livro encontrado.</p>
+              )}
+            </Swiper>
+          </div>
 
       </div>
     </div>
