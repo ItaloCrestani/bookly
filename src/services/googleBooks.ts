@@ -80,6 +80,10 @@ export async function getBooksId(id: string) {
     `https://www.googleapis.com/books/v1/volumes/${id}?key=${API_KEY}`
   )
 
+  if (response.status === 429) {
+    throw new Error("REQUEST_LIMIT")
+  }
+
   const data = await response.json()
 
   return formatDetailsBook(data);
@@ -90,6 +94,10 @@ export async function getBooksAuthor(author: string) {
     `https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&printType=books&langRestrict=pt&maxResults=20&key=${API_KEY}`
   )
 
+  if (response.status === 429) {
+    throw new Error("REQUEST_LIMIT")
+  }
+
   const data = await response.json()
 
   const validBooks = data.items?.filter((book: any) => {
@@ -98,4 +106,3 @@ export async function getBooksAuthor(author: string) {
 
   return validBooks?.map((book: any) => formatAuthorBooks(book)) || []
 }
-

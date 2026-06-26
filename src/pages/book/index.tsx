@@ -51,7 +51,13 @@ export function BookDetails() {
 
       const author = await getBooksAuthor(details.author);
       setAuthorBooks(author);
-    } catch(e) {
+    } catch(e: any) {
+      if (e.message === "REQUEST_LIMIT") {
+        toast.error("Limite atingido. Tente novamente amanhã.")
+        navigate('/')
+        return;
+      }
+
       toast.error("Livro não encontrado")
       navigate('/')
     } finally {

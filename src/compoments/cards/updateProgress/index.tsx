@@ -40,7 +40,7 @@ export function ProgressCard({ pages, currentPage, setCurrentPage, updateProgres
           <div className="p-2 bg-(--bg-button-hover) rounded-full">
             <CiBookmark size={24} color="var(--text-button)" />
           </div>
-          <div className="text-[12px]">
+          <div className="hidden 2xl:block text-[12px]">
             <p className="text-(--text-1)">Marcar página atual</p>
             <p className="text-(--text-3)">Atualize para não se perder</p>
           </div>
