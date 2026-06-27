@@ -3,7 +3,7 @@ const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
 function formatBook(book: any) {
   return {
     id: book.id,
-    image: book.volumeInfo.imageLinks?.thumbnail,
+    image: book.volumeInfo.imageLinks?.thumbnail?.replace(/^http:\/\//, "https://"),
     title: book.volumeInfo.title,
     author: book.volumeInfo.authors?.[0],
     genre: book.volumeInfo.categories?.[0],
@@ -14,7 +14,7 @@ function formatBook(book: any) {
 export function formatDetailsBook(book: any) {
   return {
     id: book.id,
-    image: book.volumeInfo.imageLinks?.thumbnail,
+    image: book.volumeInfo.imageLinks?.thumbnail?.replace(/^http:\/\//, "https://"),
     title: book.volumeInfo.title,
     author: book.volumeInfo.authors?.[0],
     genre: book.volumeInfo.categories?.[0],
@@ -29,7 +29,7 @@ export function formatAuthorBooks(book: any) {
   return {
     id: book.id,
     title: book.volumeInfo.title,
-    image: book.volumeInfo.imageLinks?.thumbnail,
+    image: book.volumeInfo.imageLinks?.thumbnail?.replace(/^http:\/\//, "https://"),
   }
 }
 
