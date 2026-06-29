@@ -37,7 +37,9 @@ Além de permitir explorar milhares de livros, a aplicação possibilita criar u
 
 ## 🚀 Acesse o projeto
 
-🔗 [Projeto online](https://web-cars-steel.vercel.app/)
+🔗 [Projeto online](https://bookly-bookshelf.vercel.app/)
+
+---
 
 ## 🛠 Tecnologias utilizadas
 
@@ -83,8 +85,6 @@ Durante o desenvolvimento deste projeto aprofundei conhecimentos em:
 - Tratamento de erros e feedback visual para o usuário
 - Organização e escalabilidade de projetos React
 
----
-
 ## 🔮 Melhorias futuras
 
 - Filtros avançados de pesquisa
@@ -95,8 +95,6 @@ Durante o desenvolvimento deste projeto aprofundei conhecimentos em:
 - Compartilhamento de listas de leitura
 - Melhor adaptação para tablets
 - Cache das requisições da Google Books API
-
----
 
 ## 👨‍💻 Autor
 
